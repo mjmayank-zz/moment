@@ -19,7 +19,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self takePhoto];
     }
     return self;
 }
@@ -28,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self takePhoto];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -47,6 +47,7 @@
                                                     otherButtonTitles: nil];
 
         [myAlertView show];
+        [self doesNotHaveCamera];
         return;
     }
 
