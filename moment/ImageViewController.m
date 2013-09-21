@@ -19,12 +19,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, 320, 320)];
-//        CGRect frame = self.imageView.frame;
-//        self.imageView2.frame = frame;
-        self.imageView2.contentMode = UIViewContentModeScaleAspectFit;
-//        
-        [self.view addSubview:self.imageView2];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, 320, 320)];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.view addSubview:self.imageView];
     }
     return self;
 }

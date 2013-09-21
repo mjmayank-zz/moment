@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35D0C8D817EE45F0005C580A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D0C8D717EE45F0005C580A /* MapKit.framework */; };
 		8FE77E8B17EE060F00654095 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8A17EE060F00654095 /* Foundation.framework */; };
 		8FE77E8D17EE060F00654095 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8C17EE060F00654095 /* CoreGraphics.framework */; };
 		8FE77E8F17EE060F00654095 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8E17EE060F00654095 /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35D0C8D717EE45F0005C580A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8FE77E8717EE060F00654095 /* moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE77E8A17EE060F00654095 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8FE77E8C17EE060F00654095 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D0C8D817EE45F0005C580A /* MapKit.framework in Frameworks */,
 				8FE77E8D17EE060F00654095 /* CoreGraphics.framework in Frameworks */,
 				8FE77E8F17EE060F00654095 /* UIKit.framework in Frameworks */,
 				8FE77E8B17EE060F00654095 /* Foundation.framework in Frameworks */,
@@ -108,6 +111,7 @@
 		8FE77E8917EE060F00654095 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35D0C8D717EE45F0005C580A /* MapKit.framework */,
 				8FE77E8A17EE060F00654095 /* Foundation.framework */,
 				8FE77E8C17EE060F00654095 /* CoreGraphics.framework */,
 				8FE77E8E17EE060F00654095 /* UIKit.framework */,

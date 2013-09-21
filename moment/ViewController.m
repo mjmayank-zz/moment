@@ -70,17 +70,9 @@
     
     ImageViewController * imageVC = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
-//    UIImage *chosenImage = [UIImage imageNamed:@"2009-10-01 08.42.24.jpg"];
-
-
-    
     [self.navigationController pushViewController:imageVC animated:YES];
-    imageVC.imageView2.image = chosenImage;
-    // = [[UIImageView alloc] initWithImage:chosenImage];
-    //    imageVC.imageView.image = chosenImage;
-//    [imageVC.view setNeedsDisplay];
+    imageVC.imageView.image = chosenImage;
     [picker dismissViewControllerAnimated:YES completion:nil];
-//    [imageVC setCameraPic:chosenImage];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -90,7 +82,10 @@
 
 /* Sim only */
 - (void)doesNotHaveCamera {
-    self.imageView.image = [UIImage imageNamed:@"CameraFailureImage"];
+    ImageViewController * imageVC = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
+    UIImage *chosenImage = [UIImage imageNamed:@"CameraFailureImage"];
+    [self.navigationController pushViewController:imageVC animated:YES];
+    imageVC.imageView.image = chosenImage;
 }
 
 @end

@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
 @interface ImageViewController : UIViewController<CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView2;
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
-- (void) setCameraPic:(UIImage *)image;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
