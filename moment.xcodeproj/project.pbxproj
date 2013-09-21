@@ -21,6 +21,8 @@
 		8FE77EB017EE060F00654095 /* momentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EAF17EE060F00654095 /* momentTests.m */; };
 		8FE77EBC17EE06A200654095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EBA17EE06A200654095 /* ViewController.m */; };
 		8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EBB17EE06A200654095 /* ViewController.xib */; };
+		8FE77EC117EE114D00654095 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EBF17EE114D00654095 /* ImageViewController.m */; };
+		8FE77EC217EE114D00654095 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EC017EE114D00654095 /* ImageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 		8FE77EB917EE06A200654095 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8FE77EBA17EE06A200654095 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8FE77EBB17EE06A200654095 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		8FE77EBE17EE114D00654095 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		8FE77EBF17EE114D00654095 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		8FE77EC017EE114D00654095 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +122,9 @@
 				8FE77EB917EE06A200654095 /* ViewController.h */,
 				8FE77EBA17EE06A200654095 /* ViewController.m */,
 				8FE77EBB17EE06A200654095 /* ViewController.xib */,
+				8FE77EBE17EE114D00654095 /* ImageViewController.h */,
+				8FE77EBF17EE114D00654095 /* ImageViewController.m */,
+				8FE77EC017EE114D00654095 /* ImageViewController.xib */,
 				8FE77E9C17EE060F00654095 /* Images.xcassets */,
 				8FE77E9117EE060F00654095 /* Supporting Files */,
 			);
@@ -229,6 +237,7 @@
 			files = (
 				8FE77E9517EE060F00654095 /* InfoPlist.strings in Resources */,
 				8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */,
+				8FE77EC217EE114D00654095 /* ImageViewController.xib in Resources */,
 				8FE77E9D17EE060F00654095 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +259,7 @@
 			files = (
 				8FE77EBC17EE06A200654095 /* ViewController.m in Sources */,
 				8FE77E9B17EE060F00654095 /* AppDelegate.m in Sources */,
+				8FE77EC117EE114D00654095 /* ImageViewController.m in Sources */,
 				8FE77E9717EE060F00654095 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

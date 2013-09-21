@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ImageViewController.h"
 
 @interface ViewController ()
 
@@ -60,20 +61,24 @@
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    ImageViewController * imageVC = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
+    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    imageVC.imageView.image = chosenImage;
 
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    self.imageView.image = chosenImage;
+    
+    [self.navigationController pushViewController:imageVC animated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 
-    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     self.imageView.image = [UIImage imageNamed:@"CameraFailureImage"];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 /* Sim only */
