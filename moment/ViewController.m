@@ -35,6 +35,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self takePhoto];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
