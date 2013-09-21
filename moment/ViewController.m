@@ -67,13 +67,18 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     ImageViewController * imageVC = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
-    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    imageVC.imageView.image = chosenImage;
+    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImage *chosenImage = [UIImage imageNamed:@"2009-10-01 08.42.24.jpg"];
+
 
     
     [self.navigationController pushViewController:imageVC animated:YES];
+    imageVC.imageView2.image = chosenImage;
+    // = [[UIImageView alloc] initWithImage:chosenImage];
+    //    imageVC.imageView.image = chosenImage;
+//    [imageVC.view setNeedsDisplay];
     [picker dismissViewControllerAnimated:YES completion:nil];
-
+    [imageVC setCameraPic:chosenImage];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

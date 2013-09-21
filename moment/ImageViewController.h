@@ -10,5 +10,9 @@
 
 @interface ImageViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView2;
+@property (strong, nonatomic) UIImage *image;
+
+- (void) setCameraPic:(UIImage *)image;
 
 @end
