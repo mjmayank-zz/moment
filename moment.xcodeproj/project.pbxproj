@@ -441,6 +441,7 @@
 				8FE77EB517EE060F00654095 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8FE77EB617EE060F00654095 /* Build configuration list for PBXNativeTarget "momentTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +450,7 @@
 				8FE77EB817EE060F00654095 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
