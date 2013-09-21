@@ -30,6 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setTitle:@"Feed"];
+    UIBarButtonItem *camera = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto)];
+    self.navigationController.topViewController.navigationItem.rightBarButtonItem = camera;
+    camera.enabled=TRUE;
 }
 
 - (void)viewDidAppear:(BOOL)animated

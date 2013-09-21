@@ -95,6 +95,7 @@
             [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
 //                    [self refresh:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
                 else{
                     // Log details of the failure
@@ -103,14 +104,20 @@
             }];
         }
         else{
-//            [HUD hide:YES];
+            [self.HUD hide:YES];
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     } progressBlock:^(int percentDone) {
         // Update your progress spinner here. percentDone will be between 0 and 100.
-//        HUD.progress = (float)percentDone/100;
+        self.HUD.progress = (float)percentDone/100;
     }];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD hides
+    [self.HUD removeFromSuperview];
+    self.HUD = nil;
 }
 
 @end

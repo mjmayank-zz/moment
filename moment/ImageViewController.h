@@ -10,13 +10,15 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <Parse/Parse.h>
+#import "MBProgressHUD.h"
 
-
-@interface ImageViewController : UIViewController<CLLocationManagerDelegate>
+@interface ImageViewController : UIViewController<CLLocationManagerDelegate, MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSDictionary *photoInfo;
+@property (strong, nonatomic)MBProgressHUD *HUD;
+@property (strong, nonatomic)MBProgressHUD *refreshHUD;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
