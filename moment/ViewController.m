@@ -34,23 +34,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-//    if (![PFUser currentUser]) { // No user logged in
-//        // Create the log in view controller
-//        PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
-//        [logInViewController setDelegate:self]; // Set ourselves as the delegate
-//        
-//        // Create the sign up view controller
-//        PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
-//        [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-//        
-//        // Assign our sign up controller to be displayed from the login controller
-//        [logInViewController setSignUpController:signUpViewController];
-//        
-//        // Present the log in view controller
-//        [self presentViewController:logInViewController animated:YES completion:NULL];
-//    }
     
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,6 +86,16 @@
     UIImage *chosenImage = [UIImage imageNamed:@"CameraFailureImage"];
     [self.navigationController pushViewController:imageVC animated:YES];
     imageVC.imageView.image = chosenImage;
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    [self dismissViewControllerAnimated:YES completion:^{
+            [self takePhoto];
+    }];
+}
+
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+    [self dismissViewControllerAnimated:YES completion:NULL]; // Dismiss the PFSignUpViewController
 }
 
 @end

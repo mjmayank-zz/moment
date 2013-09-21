@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moment/ViewController.m"
-            timestampString = "401494567.404004"
+            timestampString = "401495779.60748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "-takePhoto"
             landmarkType = "5">
          </BreakpointContent>
