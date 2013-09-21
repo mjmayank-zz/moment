@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
+- (void) takePhoto;
+
 @end

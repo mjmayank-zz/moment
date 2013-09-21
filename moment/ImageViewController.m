@@ -35,15 +35,15 @@
     self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
     self.locationManager.delegate=self;
     [self.locationManager startUpdatingLocation];
-    
-    UIBarButtonItem *save = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(savePressed)];
-    self.navigationController.topViewController.navigationItem.rightBarButtonItem = save;
-    save.enabled=TRUE;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:NO animated: YES];
+    UIBarButtonItem *save = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed)];
+    self.navigationController.topViewController.navigationItem.rightBarButtonItem = save;
+    save.enabled=TRUE;
 }
 
 - (void)didReceiveMemoryWarning

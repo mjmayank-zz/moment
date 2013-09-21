@@ -19,11 +19,12 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    ViewController * vc = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.vc = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:self.vc];
 //    self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
+    [self.vc takePhoto];
     return YES;
 }
 
@@ -41,6 +42,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [self.vc takePhoto];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
