@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		35D0C8D817EE45F0005C580A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D0C8D717EE45F0005C580A /* MapKit.framework */; };
 		35D0C8DB17EE4C87005C580A /* MomentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */; };
+		35D0C8DC17EE5495005C580A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ECB17EE4DFD00654095 /* Parse.framework */; };
 		8FE77E8B17EE060F00654095 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8A17EE060F00654095 /* Foundation.framework */; };
 		8FE77E8D17EE060F00654095 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8C17EE060F00654095 /* CoreGraphics.framework */; };
 		8FE77E8F17EE060F00654095 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8E17EE060F00654095 /* UIKit.framework */; };
@@ -26,7 +27,6 @@
 		8FE77EC117EE114D00654095 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EBF17EE114D00654095 /* ImageViewController.m */; };
 		8FE77EC217EE114D00654095 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EC017EE114D00654095 /* ImageViewController.xib */; };
 		8FE77EC417EE180500654095 /* 2009-10-01 08.42.24.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EC317EE180500654095 /* 2009-10-01 08.42.24.jpg */; };
-		8FE77ECC17EE4DFD00654095 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ECB17EE4DFD00654095 /* Parse.framework */; };
 		8FE77ECE17EE4E1900654095 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ECD17EE4E1900654095 /* AudioToolbox.framework */; };
 		8FE77ED017EE4E1E00654095 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ECF17EE4E1E00654095 /* CFNetwork.framework */; };
 		8FE77ED217EE4E2800654095 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ED117EE4E2800654095 /* CoreLocation.framework */; };
@@ -92,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D0C8DC17EE5495005C580A /* Parse.framework in Frameworks */,
 				8FE77EDE17EE4E4C00654095 /* SystemConfiguration.framework in Frameworks */,
 				8FE77EDC17EE4E4500654095 /* StoreKit.framework in Frameworks */,
 				8FE77EDA17EE4E4100654095 /* Security.framework in Frameworks */,
@@ -105,7 +106,6 @@
 				35D0C8D817EE45F0005C580A /* MapKit.framework in Frameworks */,
 				8FE77E8F17EE060F00654095 /* UIKit.framework in Frameworks */,
 				8FE77E8B17EE060F00654095 /* Foundation.framework in Frameworks */,
-				8FE77ECC17EE4DFD00654095 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +436,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/mjmayank/Dropbox/GitHub/moment,
+					/Users/raj/dev/moment,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "moment/moment-Prefix.pch";
@@ -453,6 +454,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/mjmayank/Dropbox/GitHub/moment,
+					/Users/raj/dev/moment,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "moment/moment-Prefix.pch";
