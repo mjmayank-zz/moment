@@ -26,7 +26,6 @@
 		8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EBB17EE06A200654095 /* ViewController.xib */; };
 		8FE77EC117EE114D00654095 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EBF17EE114D00654095 /* ImageViewController.m */; };
 		8FE77EC217EE114D00654095 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EC017EE114D00654095 /* ImageViewController.xib */; };
-		8FE77EC417EE180500654095 /* 2009-10-01 08.42.24.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EC317EE180500654095 /* 2009-10-01 08.42.24.jpg */; };
 		8FE77ECE17EE4E1900654095 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ECD17EE4E1900654095 /* AudioToolbox.framework */; };
 		8FE77ED017EE4E1E00654095 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ECF17EE4E1E00654095 /* CFNetwork.framework */; };
 		8FE77ED217EE4E2800654095 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77ED117EE4E2800654095 /* CoreLocation.framework */; };
@@ -74,7 +73,6 @@
 		8FE77EBE17EE114D00654095 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		8FE77EBF17EE114D00654095 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		8FE77EC017EE114D00654095 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
-		8FE77EC317EE180500654095 /* 2009-10-01 08.42.24.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2009-10-01 08.42.24.jpg"; sourceTree = "<group>"; };
 		8FE77ECB17EE4DFD00654095 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		8FE77ECD17EE4E1900654095 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8FE77ECF17EE4E1E00654095 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -177,7 +175,6 @@
 				35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */,
 				8FE77EC017EE114D00654095 /* ImageViewController.xib */,
 				8FE77E9C17EE060F00654095 /* Images.xcassets */,
-				8FE77EC317EE180500654095 /* 2009-10-01 08.42.24.jpg */,
 				8FE77E9117EE060F00654095 /* Supporting Files */,
 			);
 			path = moment;
@@ -287,7 +284,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FE77EC417EE180500654095 /* 2009-10-01 08.42.24.jpg in Resources */,
 				8FE77E9517EE060F00654095 /* InfoPlist.strings in Resources */,
 				8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */,
 				8FE77EC217EE114D00654095 /* ImageViewController.xib in Resources */,

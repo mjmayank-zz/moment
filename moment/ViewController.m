@@ -72,6 +72,7 @@
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
     [self.navigationController pushViewController:imageVC animated:YES];
     imageVC.imageView.image = chosenImage;
+    imageVC.photoInfo = info;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
