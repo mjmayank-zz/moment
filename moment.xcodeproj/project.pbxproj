@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35D0C8D817EE45F0005C580A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D0C8D717EE45F0005C580A /* MapKit.framework */; };
+		35D0C8DB17EE4C87005C580A /* MomentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */; };
 		8FE77E8B17EE060F00654095 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8A17EE060F00654095 /* Foundation.framework */; };
 		8FE77E8D17EE060F00654095 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8C17EE060F00654095 /* CoreGraphics.framework */; };
 		8FE77E8F17EE060F00654095 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8E17EE060F00654095 /* UIKit.framework */; };
@@ -49,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		35D0C8D717EE45F0005C580A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		35D0C8D917EE4C87005C580A /* MomentAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentAnnotation.h; sourceTree = "<group>"; };
+		35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentAnnotation.m; sourceTree = "<group>"; };
 		8FE77E8717EE060F00654095 /* moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE77E8A17EE060F00654095 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8FE77E8C17EE060F00654095 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -170,6 +173,8 @@
 				8FE77EBB17EE06A200654095 /* ViewController.xib */,
 				8FE77EBE17EE114D00654095 /* ImageViewController.h */,
 				8FE77EBF17EE114D00654095 /* ImageViewController.m */,
+				35D0C8D917EE4C87005C580A /* MomentAnnotation.h */,
+				35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */,
 				8FE77EC017EE114D00654095 /* ImageViewController.xib */,
 				8FE77E9C17EE060F00654095 /* Images.xcassets */,
 				8FE77EC317EE180500654095 /* 2009-10-01 08.42.24.jpg */,
@@ -308,6 +313,7 @@
 				8FE77EBC17EE06A200654095 /* ViewController.m in Sources */,
 				8FE77E9B17EE060F00654095 /* AppDelegate.m in Sources */,
 				8FE77EC117EE114D00654095 /* ImageViewController.m in Sources */,
+				35D0C8DB17EE4C87005C580A /* MomentAnnotation.m in Sources */,
 				8FE77E9717EE060F00654095 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

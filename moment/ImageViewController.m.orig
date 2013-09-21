@@ -37,7 +37,11 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
+<<<<<<< HEAD
+
+=======
     // Do any additional setup after loading the view from its nib.
+>>>>>>> Draw location on map properly
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,6 +68,11 @@
     _myAnnotation.title = @"Photo";
     [_mapView addAnnotation:_myAnnotation];
     [self.locationManager stopUpdatingLocation];
+}
+
+-(void) savePressed
+{
+    
 }
 
 @end
