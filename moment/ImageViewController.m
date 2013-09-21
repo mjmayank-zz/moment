@@ -48,10 +48,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) setCameraPic:(UIImage *)image{
-    self.imageView2.image = image;
-}
-
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
