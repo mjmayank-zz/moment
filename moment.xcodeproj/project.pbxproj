@@ -19,6 +19,8 @@
 		8FE77EA617EE060F00654095 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77E8E17EE060F00654095 /* UIKit.framework */; };
 		8FE77EAE17EE060F00654095 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EAC17EE060F00654095 /* InfoPlist.strings */; };
 		8FE77EB017EE060F00654095 /* momentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EAF17EE060F00654095 /* momentTests.m */; };
+		8FE77EBC17EE06A200654095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EBA17EE06A200654095 /* ViewController.m */; };
+		8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EBB17EE06A200654095 /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		8FE77EAB17EE060F00654095 /* momentTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "momentTests-Info.plist"; sourceTree = "<group>"; };
 		8FE77EAD17EE060F00654095 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8FE77EAF17EE060F00654095 /* momentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = momentTests.m; sourceTree = "<group>"; };
+		8FE77EB917EE06A200654095 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8FE77EBA17EE06A200654095 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8FE77EBB17EE06A200654095 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +114,9 @@
 			children = (
 				8FE77E9917EE060F00654095 /* AppDelegate.h */,
 				8FE77E9A17EE060F00654095 /* AppDelegate.m */,
+				8FE77EB917EE06A200654095 /* ViewController.h */,
+				8FE77EBA17EE06A200654095 /* ViewController.m */,
+				8FE77EBB17EE06A200654095 /* ViewController.xib */,
 				8FE77E9C17EE060F00654095 /* Images.xcassets */,
 				8FE77E9117EE060F00654095 /* Supporting Files */,
 			);
@@ -220,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FE77E9517EE060F00654095 /* InfoPlist.strings in Resources */,
+				8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */,
 				8FE77E9D17EE060F00654095 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FE77EBC17EE06A200654095 /* ViewController.m in Sources */,
 				8FE77E9B17EE060F00654095 /* AppDelegate.m in Sources */,
 				8FE77E9717EE060F00654095 /* main.m in Sources */,
 			);
