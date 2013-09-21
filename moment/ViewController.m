@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setTitle:@"Retake"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
