@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
             endingLineNumber = "73"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            landmarkName = "-takePhoto"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moment/ImageViewController.m"
-            timestampString = "401493812.688819"
+            timestampString = "401495027.768754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-savePressed"
-            landmarkType = "5">
+            startingLineNumber = "84"
+            endingLineNumber = "84">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
