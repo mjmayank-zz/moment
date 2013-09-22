@@ -136,7 +136,7 @@
 
     // Construct query
     PFQuery *query = [PFQuery queryWithClassName:@kParseObjectClassKey];
-    [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:2.0];
+    [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:0.1];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
