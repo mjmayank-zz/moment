@@ -124,6 +124,7 @@
 
     // Create a PFGeoPoint using the current location (to use in our query)
     CLLocation *currentLocation = [[AppDelegate sharedLocationManager] location];
+    [AppDelegate sharedLocationManager].delegate = self;
     PFGeoPoint *userLocation =
     [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
                            longitude:currentLocation.coordinate.longitude];
@@ -293,6 +294,19 @@
 
 - (IBAction)buttonTouched:(id)sender{
     NSLog(@"touched");
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    if(self.lastLocation ==NULL){
+        self.lastLocation = locations[0];
+    }
+    CLLocationDistance distance = [locations[0] distanceFromLocation:self.lastLocation];
+    if(distance > 20.0){
+        self.lastLocation = locations[0];
+        [self downloadAllImages];
+        NSLog(@"%f", distance);
+    }
 }
 
 @end
