@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *photoScrollView;
 @property (strong, nonatomic)  NSMutableArray *allImages;
 @property (strong, nonatomic) CLLocation *lastLocation;
+@property (strong, nonatomic) NSMutableArray *captions;
 
 - (void) takePhoto;
 

@@ -284,6 +284,15 @@
                                           THUMBNAIL_HEIGHT);
                 button.imageView.contentMode = UIViewContentModeScaleAspectFill;
                 [button setTitle:[eachObject objectId] forState:UIControlStateReserved];
+                
+                if([[images objectAtIndex:i] objectForKey:@"caption"] != NULL){
+                    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
+                    label.backgroundColor = [UIColor whiteColor];
+    //                label.textColor = [UIColor ba];
+                    label.text = [[images objectAtIndex:i] objectForKey:@"caption"];
+                    [button addSubview:label];
+                }
+                
                 [self.photoScrollView addSubview:button];
             }
             

@@ -26,7 +26,7 @@
         // Custom initialization
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, 320, 320)];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.view addSubview:self.imageView];
+        [self.view insertSubview:self.imageView belowSubview:self.textField];
         _didAddAnnotation = NO;
     }
     return self;
@@ -36,6 +36,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,6 +120,7 @@
             // Associate this PFObject with the current user
             PFUser *user = [PFUser currentUser];
             [userPhoto setObject:user forKey:@kParseObjectUserKey];
+            [userPhoto setObject:self.textField.text forKey:@kParseObjectCaption];
 
             // Set the access control list to current user for security purposes
 //            userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
@@ -146,6 +150,12 @@
     // Remove HUD from screen when the HUD hides
     [self.HUD removeFromSuperview];
     self.HUD = nil;
+}
+
+- (void)dismissKeyboard
+{
+    [self.view endEditing:YES];
+    //    self.view.backgroundColor = [UIColor aquaColor];
 }
 
 @end

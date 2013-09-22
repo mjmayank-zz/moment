@@ -174,11 +174,11 @@
 				8FE77EBB17EE06A200654095 /* ViewController.xib */,
 				8FE77EBE17EE114D00654095 /* ImageViewController.h */,
 				8FE77EBF17EE114D00654095 /* ImageViewController.m */,
+				8FE77EC017EE114D00654095 /* ImageViewController.xib */,
 				35D0C8D917EE4C87005C580A /* MomentAnnotation.h */,
 				35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */,
 				8FE77EDF17EE5B7100654095 /* MBProgressHUD.h */,
 				8FE77EE017EE5B7100654095 /* MBProgressHUD.m */,
-				8FE77EC017EE114D00654095 /* ImageViewController.xib */,
 				8FE77E9C17EE060F00654095 /* Images.xcassets */,
 				8FE77E9117EE060F00654095 /* Supporting Files */,
 			);

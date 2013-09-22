@@ -10,6 +10,7 @@
 #define kParseObjectGeoKey      "geo"
 #define kParseObjectImageKey    "imageFile"
 #define kParseObjectUserKey     "user"
+#define kParseObjectCaption     "caption"
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"

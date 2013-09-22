@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSDictionary *photoInfo;
 @property (strong, nonatomic) MBProgressHUD *HUD;
+@property (strong, nonatomic) IBOutlet UITextField *textField;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
