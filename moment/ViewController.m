@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ImageViewController.h"
 #import "AppDelegate.h"
+#import "DetailViewController.h"
 
 @interface ViewController ()
 
@@ -311,19 +312,22 @@
 
 - (IBAction)buttonTouched:(id)sender{
     NSLog(@"touched");
+    DetailViewController *dvc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    if(self.lastLocation ==NULL){
-        self.lastLocation = locations[0];
-    }
-    CLLocationDistance distance = [locations[0] distanceFromLocation:self.lastLocation];
-    if(distance > 20.0){
-        self.lastLocation = locations[0];
-        [self downloadAllImages];
-        NSLog(@"%f", distance);
-    }
+//    if(self.lastLocation ==NULL){
+//        self.lastLocation = locations[0];
+//    }
+//    CLLocationDistance distance = [locations[0] distanceFromLocation:self.lastLocation];
+//    if(distance > 20.0){
+//        self.lastLocation = locations[0];
+//        [self downloadAllImages];
+//        NSLog(@"%f", distance);
+//    }
 }
 
 @end

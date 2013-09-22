@@ -36,6 +36,8 @@
 		8FE77EDC17EE4E4500654095 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77EDB17EE4E4500654095 /* StoreKit.framework */; };
 		8FE77EDE17EE4E4C00654095 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE77EDD17EE4E4C00654095 /* SystemConfiguration.framework */; };
 		8FE77EE117EE5B7100654095 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EE017EE5B7100654095 /* MBProgressHUD.m */; };
+		8FE77EEA17EF74A500654095 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE77EE817EF74A500654095 /* DetailViewController.m */; };
+		8FE77EEB17EF74A500654095 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FE77EE917EF74A500654095 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,9 @@
 		8FE77EDD17EE4E4C00654095 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8FE77EDF17EE5B7100654095 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		8FE77EE017EE5B7100654095 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
+		8FE77EE717EF74A500654095 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		8FE77EE817EF74A500654095 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		8FE77EE917EF74A500654095 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +180,9 @@
 				8FE77EBE17EE114D00654095 /* ImageViewController.h */,
 				8FE77EBF17EE114D00654095 /* ImageViewController.m */,
 				8FE77EC017EE114D00654095 /* ImageViewController.xib */,
+				8FE77EE717EF74A500654095 /* DetailViewController.h */,
+				8FE77EE817EF74A500654095 /* DetailViewController.m */,
+				8FE77EE917EF74A500654095 /* DetailViewController.xib */,
 				35D0C8D917EE4C87005C580A /* MomentAnnotation.h */,
 				35D0C8DA17EE4C87005C580A /* MomentAnnotation.m */,
 				8FE77EDF17EE5B7100654095 /* MBProgressHUD.h */,
@@ -291,6 +299,7 @@
 			files = (
 				8FE77E9517EE060F00654095 /* InfoPlist.strings in Resources */,
 				8FE77EBD17EE06A200654095 /* ViewController.xib in Resources */,
+				8FE77EEB17EF74A500654095 /* DetailViewController.xib in Resources */,
 				8FE77EC217EE114D00654095 /* ImageViewController.xib in Resources */,
 				8FE77E9D17EE060F00654095 /* Images.xcassets in Resources */,
 			);
@@ -317,6 +326,7 @@
 				8FE77EC117EE114D00654095 /* ImageViewController.m in Sources */,
 				35D0C8DB17EE4C87005C580A /* MomentAnnotation.m in Sources */,
 				8FE77E9717EE060F00654095 /* main.m in Sources */,
+				8FE77EEA17EF74A500654095 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
