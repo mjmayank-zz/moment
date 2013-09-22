@@ -76,6 +76,14 @@
     PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
     
     //HUD creation here (see example for code)
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    
+    // Set determinate mode
+    self.HUD.mode = MBProgressHUDModeDeterminate;
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"Uploading";
+    [self.HUD show:YES];
     
     // Save PFFile
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
