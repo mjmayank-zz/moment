@@ -23,7 +23,6 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSDictionary *photoInfo;
 @property (strong, nonatomic)MBProgressHUD *HUD;
-@property (strong, nonatomic)MBProgressHUD *refreshHUD;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

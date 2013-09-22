@@ -43,7 +43,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:NO animated: YES];
-    UIBarButtonItem *save = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed)];
+    UIBarButtonItem *save = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = save;
     save.enabled=TRUE;
 }
@@ -66,7 +66,8 @@
     [self.locationManager stopUpdatingLocation];
 }
 
-- (void)savePressed{
+- (IBAction)savePressed:(id)sender{
+    ((UIBarButtonItem *)sender).enabled = NO;
     UIImage *image = [self.photoInfo objectForKey:@"UIImagePickerControllerEditedImage"];
     NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
     [self uploadImage:imageData];
