@@ -119,7 +119,7 @@
             [userPhoto setObject:user forKey:@kParseObjectUserKey];
 
             // Set the access control list to current user for security purposes
-            userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+//            userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
 
             // Save this in background
             [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
