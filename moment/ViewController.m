@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "ImageViewController.h"\
-
+#import "ImageViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -121,12 +121,17 @@
     
     // Show the HUD while the provided method executes in a new thread
     [self.refreshHUD show:YES];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"UserPhoto"];
-    PFUser *user = [PFUser currentUser];
-    [query whereKey:@"user" equalTo:user];
-    [query orderByAscending:@"createdAt"];
-    
+
+    // Create a PFGeoPoint using the current location (to use in our query)
+    CLLocation *currentLocation = [[AppDelegate sharedLocationManager] location];
+    PFGeoPoint *userLocation =
+    [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
+                           longitude:currentLocation.coordinate.longitude];
+
+    // Construct query
+    PFQuery *query = [PFQuery queryWithClassName:@kParseObjectClassKey];
+    [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:2.0];
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
@@ -240,7 +245,7 @@
         // Iterate over all images and get the data from the PFFile
         for (int i = 0; i < images.count; i++) {
             PFObject *eachObject = [images objectAtIndex:i];
-            PFFile *theImage = [eachObject objectForKey:@"imageFile"];
+            PFFile *theImage = [eachObject objectForKey:@kParseObjectImageKey];
             NSData *imageData = [theImage getData];
             UIImage *image = [UIImage imageWithData:imageData];
             [imageDataArray addObject:image];

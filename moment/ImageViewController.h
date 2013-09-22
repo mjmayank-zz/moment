@@ -11,18 +11,13 @@
 #import <CoreLocation/CoreLocation.h>
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
+#import "AppDelegate.h"
 
-#define kParseObjectClassKey    "geoImage"
-#define kParseObjectGeoKey      "geo"
-#define kParseObjectImageKey    "imageFile"
-#define kParseObjectUserKey     "user"
-
-@interface ImageViewController : UIViewController<CLLocationManagerDelegate, MBProgressHUDDelegate>
+@interface ImageViewController : UIViewController<MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
-@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSDictionary *photoInfo;
-@property (strong, nonatomic)MBProgressHUD *HUD;
+@property (strong, nonatomic) MBProgressHUD *HUD;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

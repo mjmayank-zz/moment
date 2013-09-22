@@ -13,6 +13,7 @@
 @interface ImageViewController ()
 
 @property (strong, nonatomic) MomentAnnotation* myAnnotation;
+@property BOOL didAddAnnotation;
 
 @end
 
@@ -26,6 +27,7 @@
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, 320, 320)];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:self.imageView];
+        _didAddAnnotation = NO;
     }
     return self;
 }
@@ -33,10 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -46,24 +44,24 @@
     UIBarButtonItem *save = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(savePressed:)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = save;
     save.enabled=TRUE;
+
+    if (!_didAddAnnotation) {
+        _didAddAnnotation = YES;
+        CLLocationCoordinate2D zoomLocation = [[AppDelegate sharedLocationManager] location].coordinate;
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+        [_mapView setRegion:viewRegion animated:YES];
+
+        _myAnnotation = [[MomentAnnotation alloc] init];
+        _myAnnotation.coordinate = zoomLocation;
+        _myAnnotation.title = @"Photo";
+        [_mapView addAnnotation:_myAnnotation];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocationCoordinate2D zoomLocation = [[locations lastObject] coordinate];
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    [_mapView setRegion:viewRegion animated:YES];
-
-    _myAnnotation = [[MomentAnnotation alloc] init];
-    _myAnnotation.coordinate = zoomLocation;
-    _myAnnotation.title = @"Photo";
-    [_mapView addAnnotation:_myAnnotation];
-    [self.locationManager stopUpdatingLocation];
 }
 
 - (IBAction)savePressed:(id)sender{

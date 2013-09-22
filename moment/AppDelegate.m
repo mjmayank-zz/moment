@@ -45,6 +45,21 @@
     return YES;
 }
 
++ (CLLocationManager *)sharedLocationManager
+{
+    //  Static local predicate must be initialized to 0
+    static CLLocationManager *sharedInstance = nil;
+    static dispatch_once_t onceToken = 0;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[CLLocationManager alloc] init];
+        sharedInstance = [[CLLocationManager alloc] init];
+        sharedInstance.desiredAccuracy = kCLLocationAccuracyBest;
+        [sharedInstance startUpdatingLocation];
+        // Do any other initialisation stuff here
+    });
+    return sharedInstance;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
