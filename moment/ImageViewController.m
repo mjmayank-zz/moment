@@ -72,6 +72,24 @@
     [self uploadImage:imageData];
 }
 
+- (IBAction)postPost:(id)sender;
+{
+    // Create a PFGeoPoint using the user's location
+    PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:_myAnnotation.coordinate.latitude
+                                                      longitude:_myAnnotation.coordinate.longitude];
+
+    // Create a PFObject using the Post class and set the values we extracted above
+    PFObject *postObject = [PFObject objectWithClassName:@kParseObjectClassKey];
+    [postObject setObject:currentPoint forKey:@kParseObjectGeoKey];
+
+    // Set the access control list on the postObject to restrict future modifications
+    // to this object
+    PFACL *readOnlyACL = [PFACL ACL];
+    [readOnlyACL setPublicReadAccess:YES]; // Create read-only permissions
+    [readOnlyACL setPublicWriteAccess:NO];
+    [postObject setACL:readOnlyACL]; // Set the permissions on the postObject
+}
+
 - (void)uploadImage:(NSData *)imageData{
     PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
     
@@ -88,21 +106,25 @@
     // Save PFFile
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            // Hide old HUD, show completed HUD (see example for code)
-            
             // Create a PFObject around a PFFile and associate it with the current user
-            PFObject *userPhoto = [PFObject objectWithClassName:@"UserPhoto"];
-            [userPhoto setObject:imageFile forKey:@"imageFile"];
-            
+            PFObject *userPhoto = [PFObject objectWithClassName:@kParseObjectClassKey];
+            [userPhoto setObject:imageFile forKey:@kParseObjectImageKey];
+
+            // Create a PFGeoPoint using the user's location and associate it
+            PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:_myAnnotation.coordinate.latitude
+                                                              longitude:_myAnnotation.coordinate.longitude];
+            [userPhoto setObject:currentPoint forKey:@kParseObjectGeoKey];
+
+            // Associate this PFObject with the current user
+            PFUser *user = [PFUser currentUser];
+            [userPhoto setObject:user forKey:@kParseObjectUserKey];
+
             // Set the access control list to current user for security purposes
             userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
-            
-            PFUser *user = [PFUser currentUser];
-            [userPhoto setObject:user forKey:@"user"];
-            
+
+            // Save this in background
             [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
-//                    [self refresh:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
                 else{
@@ -111,13 +133,12 @@
                 }
             }];
         }
-        else{
+        else {
             [self.HUD hide:YES];
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     } progressBlock:^(int percentDone) {
-        // Update your progress spinner here. percentDone will be between 0 and 100.
         self.HUD.progress = (float)percentDone/100;
     }];
 }

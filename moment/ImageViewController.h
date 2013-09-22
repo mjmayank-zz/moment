@@ -12,6 +12,11 @@
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
 
+#define kParseObjectClassKey    "geoImage"
+#define kParseObjectGeoKey      "geo"
+#define kParseObjectImageKey    "imageFile"
+#define kParseObjectUserKey     "user"
+
 @interface ImageViewController : UIViewController<CLLocationManagerDelegate, MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
