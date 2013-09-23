@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, MBProgressHUDDelegate, CLLocationManagerDelegate>
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, MBProgressHUDDelegate, CLLocationManagerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic)MBProgressHUD *refreshHUD;
@@ -18,6 +18,7 @@
 @property (strong, nonatomic)  NSMutableArray *allImages;
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) NSMutableArray *captions;
+@property (strong, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 
 - (void) takePhoto;
 

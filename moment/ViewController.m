@@ -10,6 +10,7 @@
 #import "ImageViewController.h"
 #import "AppDelegate.h"
 #import "DetailViewController.h"
+#import "FeedCell.h"
 
 @interface ViewController ()
 
@@ -29,6 +30,9 @@
     if (self) {
         // Custom initialization
         self.allImages = [[NSMutableArray alloc] init];
+        self.photoCollectionView.dataSource = self;
+        self.photoCollectionView.delegate = self;
+        [self.photoCollectionView registerClass:[FeedCell class] forCellWithReuseIdentifier:@"FeedCell"];
     }
     return self;
 }
@@ -137,7 +141,7 @@
 
     // Construct query
     PFQuery *query = [PFQuery queryWithClassName:@kParseObjectClassKey];
-    [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:0.1];
+    [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:10000];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -329,5 +333,21 @@
 //        NSLog(@"%f", distance);
 //    }
 }
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FeedCell * cell = [self.photoCollectionView  dequeueReusableCellWithReuseIdentifier:@"FeedCell" forIndexPath:indexPath];
+    PFFile *theImage = [[self.allImages objectAtIndex:indexPath.row] objectForKey:@kParseObjectImageKey];
+    NSData *imageData = [theImage getData];
+    UIImage *image = [UIImage imageWithData:imageData];
+    cell.imageView.image = image;
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.allImages.count;
+}
+
 
 @end
