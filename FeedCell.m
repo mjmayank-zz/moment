@@ -15,6 +15,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.backgroundColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 312, 312)];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:self.imageView];
     }
     return self;
 }

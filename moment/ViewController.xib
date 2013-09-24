@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
-                <outlet property="photoCollectionView" destination="wfl-9i-BIX" id="3ik-a4-9ib"/>
+                <outlet property="photoCollectionView" destination="234-Sz-KX3" id="hwk-Wm-gsJ"/>
                 <outlet property="photoScrollView" destination="vT0-W7-mNN" id="2fO-Pl-xcJ"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -16,10 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wfl-9i-BIX">
-                    <rect key="frame" x="0.0" y="20" width="320" height="553"/>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="234-Sz-KX3">
+                    <rect key="frame" x="-9" y="10" width="338" height="558"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wml-Ng-quE">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="svO-Rr-QHR">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -27,7 +28,7 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vT0-W7-mNN">
+                <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vT0-W7-mNN">
                     <rect key="frame" x="0.0" y="20" width="338" height="548"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>

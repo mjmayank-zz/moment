@@ -30,9 +30,6 @@
     if (self) {
         // Custom initialization
         self.allImages = [[NSMutableArray alloc] init];
-        self.photoCollectionView.dataSource = self;
-        self.photoCollectionView.delegate = self;
-        [self.photoCollectionView registerClass:[FeedCell class] forCellWithReuseIdentifier:@"FeedCell"];
     }
     return self;
 }
@@ -42,6 +39,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.photoCollectionView.dataSource = self;
+    self.photoCollectionView.delegate = self;
+    [self.photoCollectionView registerClass:[FeedCell class] forCellWithReuseIdentifier:@"fcell"];
     [self setTitle:@"Feed"];
     UIBarButtonItem *camera = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = camera;
@@ -162,7 +162,7 @@
                     self.refreshHUD.delegate = self;
                 });
             }
-            NSLog(@"Successfully retrieved %d photos.", objects.count);
+            NSLog(@"Successfully retrieved %lu photos.", (unsigned long)objects.count);
             
             // Retrieve existing objectIDs
             
@@ -234,6 +234,7 @@
             
             // Remove and add from objects before this
             [self setUpImages:self.allImages];
+            [self.photoCollectionView reloadData];
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -333,21 +334,62 @@
 //        NSLog(@"%f", distance);
 //    }
 }
+
+#pragma mark - UICollectionView Datasource
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    FeedCell * cell = [self.photoCollectionView  dequeueReusableCellWithReuseIdentifier:@"FeedCell" forIndexPath:indexPath];
+    FeedCell * cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"fcell" forIndexPath:indexPath];
     PFFile *theImage = [[self.allImages objectAtIndex:indexPath.row] objectForKey:@kParseObjectImageKey];
     NSData *imageData = [theImage getData];
     UIImage *image = [UIImage imageWithData:imageData];
-    cell.imageView.image = image;
+    [cell.imageView setImage:image];
+    
+    if([[self.allImages objectAtIndex:indexPath.row]  objectForKey:@"caption"] != NULL && ![[[self.allImages objectAtIndex:indexPath.row]  objectForKey:@"caption"]  isEqual: @""]){
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
+        label.backgroundColor = [UIColor whiteColor];
+        //                label.textColor = [UIColor ba];
+        label.text = [[self.allImages objectAtIndex:indexPath.row]  objectForKey:@"caption"];
+        [cell addSubview:label];
+    }
 //    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    NSLog(@"%d cells", self.allImages.count);
     return self.allImages.count;
 }
 
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
+{
+    return 1;
+}
 
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: Select Item
+    NSLog(@"selected");
+    DetailViewController *dvc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:dvc animated:YES];
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: Deselect item
+    NSLog(@"deselected");
+}
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+// 1
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(312, 312);
+}
+
+// 3
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(8, 8, 8, 8);
+}
 @end
