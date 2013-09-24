@@ -23,6 +23,7 @@
 #define THUMBNAIL_COLS 1
 #define THUMBNAIL_WIDTH 312
 #define THUMBNAIL_HEIGHT 312
+#define METERS_PER_MILE 1609.344
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -120,17 +121,17 @@
 
 - (void)downloadAllImages
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Showing Refresh HUD");
-        self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.view addSubview:self.refreshHUD];
-        
-        // Register for HUD callbacks so we can remove it from the window at the right time
-        self.refreshHUD.delegate = self;
-        
-        // Show the HUD while the provided method executes in a new thread
-        [self.refreshHUD show:YES];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        NSLog(@"Showing Refresh HUD");
+//        self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//        [self.view addSubview:self.refreshHUD];
+//        
+//        // Register for HUD callbacks so we can remove it from the window at the right time
+//        self.refreshHUD.delegate = self;
+//        
+//        // Show the HUD while the provided method executes in a new thread
+//        [self.refreshHUD show:YES];
+//    });
 
     // Create a PFGeoPoint using the current location (to use in our query)
     CLLocation *currentLocation = [[AppDelegate sharedLocationManager] location];
@@ -146,22 +147,22 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            if (self.refreshHUD) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.refreshHUD hide:YES];
-                    self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
-                    [self.view addSubview:self.refreshHUD];
-
-                    // The sample image is based on the work by http://www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
-                    // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
-                    self.refreshHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                    
-                    // Set custom view mode
-                    self.refreshHUD.mode = MBProgressHUDModeCustomView;
-                    
-                    self.refreshHUD.delegate = self;
-                });
-            }
+//            if (self.refreshHUD) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.refreshHUD hide:YES];
+//                    self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//                    [self.view addSubview:self.refreshHUD];
+//
+//                    // The sample image is based on the work by http://www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
+//                    // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
+//                    self.refreshHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+//                    
+//                    // Set custom view mode
+//                    self.refreshHUD.mode = MBProgressHUDModeCustomView;
+//                    
+//                    self.refreshHUD.delegate = self;
+//                });
+//            }
             NSLog(@"Successfully retrieved %lu photos.", (unsigned long)objects.count);
             
             // Retrieve existing objectIDs
@@ -237,9 +238,9 @@
             [self.photoCollectionView reloadData];
             
         } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.refreshHUD hide:YES];
-            });
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.refreshHUD hide:YES];
+//            });
             
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -372,6 +373,8 @@
     // TODO: Select Item
     NSLog(@"selected");
     DetailViewController *dvc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    
+    dvc.object = self.allImages[[indexPath row]];
     
     [self.navigationController pushViewController:dvc animated:YES];
 }
