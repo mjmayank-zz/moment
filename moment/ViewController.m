@@ -141,11 +141,11 @@
             // The find succeeded.
 
             NSLog(@"Successfully retrieved %lu photos.", (unsigned long)objects.count);
-            
-            self.allData = [[NSMutableArray alloc] initWithArray:objects];
+        
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
             dispatch_async(queue, ^{
                 [self.allImages removeAllObjects];
+//                NSMutableArray *temp = [[NSMutableArray alloc] init];
                 for (PFObject *object in objects){
                     PFFile *theImage = [object objectForKey:@kParseObjectImageKey];
                     
@@ -153,7 +153,11 @@
                     
                     [self.allImages addObject:imageData];
                 }
+//                self.allImages = temp;
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:objects];
+                    
+                    self.allData = temp;
                     [self.photoCollectionView reloadData];
                 });
             });

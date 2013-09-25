@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 
-@interface ImageViewController : UIViewController<MBProgressHUDDelegate>
+@interface ImageViewController : UIViewController<MBProgressHUDDelegate, UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSDictionary *photoInfo;

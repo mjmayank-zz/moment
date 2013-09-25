@@ -41,14 +41,10 @@
     PFGeoPoint * geo = [self.object objectForKey:@"geo"];
     
     CLLocation *location = [[CLLocation alloc] initWithLatitude:geo.latitude longitude:geo.longitude];
-    
-//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(geo.latitude, geo.longitude);
-    
     CLLocation *userLocation = [[AppDelegate sharedLocationManager] location];
     
     CLLocationDistance distance = [userLocation distanceFromLocation:location];
-    
-    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f meters away", distance];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.0f meters away", distance];
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     [self.mapView setRegion:viewRegion animated:YES];
