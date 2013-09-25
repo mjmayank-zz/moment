@@ -16,9 +16,10 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 312, 312)];
-        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:self.imageView];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 312, 312)];
+//        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        [self insertSubview:self.imageView belowSubview:self.captionLabel];
+//        self.captionLabel.text = self.caption;
     }
     return self;
 }
@@ -31,5 +32,24 @@
     // Drawing code
 }
 */
+
+-(void) setCaption:(NSString *)caption
+{
+    captionLabel.text = caption;
+}
+
+-(void) setImage:(UIImage *)image
+{
+    imageView.image = image;
+}
+
+-(void) hideCaption
+{
+    [self.labelContainer setHidden:YES];
+}
+-(void) showCaption
+{
+    [self.labelContainer setHidden:NO];
+}
 
 @end

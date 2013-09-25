@@ -15,5 +15,9 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (assign, nonatomic) PFObject * object;
 @property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (strong, nonatomic) IBOutlet UILabel *captionLabel;
+
+@property (strong, nonatomic) CLLocation *location;
+@property (assign, nonatomic) CLLocationDistance distance;
 
 @end

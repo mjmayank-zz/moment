@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedCell : UICollectionViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@interface FeedCell : UICollectionViewCell{
+    IBOutlet UIImageView *imageView;
+    IBOutlet UILabel *captionLabel;
+}
+
+
+@property (strong, nonatomic) NSString * caption;
+@property (strong, nonatomic) UIImage * image;
+@property (strong, nonatomic) IBOutlet UIView *labelContainer;
+
+-(void)hideCaption;
+-(void)showCaption;
 
 @end

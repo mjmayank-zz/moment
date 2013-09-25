@@ -133,7 +133,9 @@
             // Associate this PFObject with the current user
             PFUser *user = [PFUser currentUser];
             [userPhoto setObject:user forKey:@kParseObjectUserKey];
-            [userPhoto setObject:self.textField.text forKey:@kParseObjectCaption];
+            if(![self.textField.text isEqualToString:@""]){
+                [userPhoto setObject:self.textField.text forKey:@kParseObjectCaption];
+            }
 
             // Set the access control list to current user for security purposes
 //            userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];

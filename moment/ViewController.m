@@ -45,7 +45,10 @@
     // Do any additional setup after loading the view from its nib.
     self.photoCollectionView.dataSource = self;
     self.photoCollectionView.delegate = self;
-    [self.photoCollectionView registerClass:[FeedCell class] forCellWithReuseIdentifier:@"fcell"];
+    
+    UINib *nib = [UINib nibWithNibName:@"FeedCell" bundle:nil];
+    
+    [self.photoCollectionView registerNib:nib forCellWithReuseIdentifier:@"fcell"];
     [self setTitle:@"Feed"];
     UIBarButtonItem *camera = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = camera;
@@ -192,19 +195,16 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedCell * cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"fcell" forIndexPath:indexPath];
-//    PFFile *theImage = ;
-//    NSData *imageData = [theImage getData];
-    UIImage *image = [UIImage imageWithData:[self.allImages objectAtIndex:indexPath.row]];
-    [cell.imageView setImage:image];
     
-    if([[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"] != NULL && ![[[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"]  isEqual: @""]){
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
-        label.backgroundColor = [UIColor whiteColor];
-        //                label.textColor = [UIColor ba];
-        label.text = [[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"];
-        [cell addSubview:label];
+    [cell setImage:[UIImage imageWithData:[self.allImages objectAtIndex:indexPath.row]]];
+    
+    if([[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"] != NULL){
+        [cell showCaption];
+        [cell setCaption:[[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"]];
     }
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    else{
+        [cell hideCaption];
+    }
     return cell;
 }
 
@@ -239,12 +239,12 @@
 
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(312, 312);
+    return CGSizeMake(320, 320);
 }
 
 // 3
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(4, 8, 4, 8);
+    return UIEdgeInsetsMake(4, 0, 4, 0);
 }
 @end
