@@ -32,6 +32,7 @@
     if (self) {
         // Custom initialization
         self.allImages = [[NSMutableArray alloc] init];
+        self.allData = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -53,10 +54,11 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        [self downloadAllImages];
-    });
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_async(queue, ^{
+//        [self downloadAllImages];
+//    });
+    [self downloadAllImages];
 //    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
@@ -123,18 +125,6 @@
 
 - (void)downloadAllImages
 {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSLog(@"Showing Refresh HUD");
-//        self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//        [self.view addSubview:self.refreshHUD];
-//        
-//        // Register for HUD callbacks so we can remove it from the window at the right time
-//        self.refreshHUD.delegate = self;
-//        
-//        // Show the HUD while the provided method executes in a new thread
-//        [self.refreshHUD show:YES];
-//    });
-
     // Create a PFGeoPoint using the current location (to use in our query)
     CLLocation *currentLocation = [[AppDelegate sharedLocationManager] location];
     [AppDelegate sharedLocationManager].delegate = self;
@@ -152,155 +142,25 @@
 
             NSLog(@"Successfully retrieved %lu photos.", (unsigned long)objects.count);
             
-            // Retrieve existing objectIDs
-            
-            NSMutableArray *oldCompareObjectIDArray = [NSMutableArray array];
-            for (UIView *view in [self.photoScrollView subviews]) {
-                if ([view isKindOfClass:[UIButton class]]) {
-                    UIButton *eachButton = (UIButton *)view;
-                    [oldCompareObjectIDArray addObject:[eachButton titleForState:UIControlStateReserved]];
-                }
-            }
-            
-            NSMutableArray *oldCompareObjectIDArray2 = [NSMutableArray arrayWithArray:oldCompareObjectIDArray];
-            
-            // If there are photos, we start extracting the data
-            // Save a list of object IDs while extracting this data
-            
-            NSMutableArray *newObjectIDArray = [NSMutableArray array];
-            if (objects.count > 0) {
-                for (PFObject *eachObject in objects) {
-                    [newObjectIDArray addObject:[eachObject objectId]];
-                }
-            }
-            
-            // Compare the old and new object IDs
-            NSMutableArray *newCompareObjectIDArray = [NSMutableArray arrayWithArray:newObjectIDArray];
-            NSMutableArray *newCompareObjectIDArray2 = [NSMutableArray arrayWithArray:newObjectIDArray];
-            if (oldCompareObjectIDArray.count > 0) {
-                // New objects
-                [newCompareObjectIDArray removeObjectsInArray:oldCompareObjectIDArray];
-                // Remove old objects if you delete them using the web browser
-                [oldCompareObjectIDArray removeObjectsInArray:newCompareObjectIDArray2];
-                if (oldCompareObjectIDArray.count > 0) {
-                    // Check the position in the objectIDArray and remove
-                    NSMutableArray *listOfToRemove = [[NSMutableArray alloc] init];
-                    for (NSString *objectID in oldCompareObjectIDArray){
-                        int i = 0;
-                        for (NSString *oldObjectID in oldCompareObjectIDArray2){
-                            if ([objectID isEqualToString:oldObjectID]) {
-                                // Make list of all that you want to remove and remove at the end
-                                [listOfToRemove addObject:[NSNumber numberWithInt:i]];
-                            }
-                            i++;
-                        }
-                    }
+            self.allData = [[NSMutableArray alloc] initWithArray:objects];
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                for (PFObject *object in objects){
+                    PFFile *theImage = [object objectForKey:@kParseObjectImageKey];
                     
-                    // Remove from the back
-                    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
-                    [listOfToRemove sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+                    NSData *imageData = [theImage getData];
                     
-                    for (NSNumber *index in listOfToRemove){
-                        [self.allImages removeObjectAtIndex:[index intValue]];
-                    }
+                    [self.allImages addObject:imageData];
                 }
-            }
-            
-            // Add new objects
-            for (NSString *objectID in newCompareObjectIDArray){
-                for (PFObject *eachObject in objects){
-                    if ([[eachObject objectId] isEqualToString:objectID]) {
-                        NSMutableArray *selectedPhotoArray = [[NSMutableArray alloc] init];
-                        [selectedPhotoArray addObject:eachObject];
-                        
-                        if (selectedPhotoArray.count > 0) {
-                            [self.allImages addObjectsFromArray:selectedPhotoArray];
-                        }
-                    }
-                }
-            }
-            
-            // Remove and add from objects before this
-            [self setUpImages:self.allImages];
-            [self.photoCollectionView reloadData];
-            
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.photoCollectionView reloadData];
+                });
+            });
         } else {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.refreshHUD hide:YES];
-//            });
-            
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-}
-
-- (void)setUpImages:(NSArray *)images
-{
-//    // Contains a list of all the BUTTONS
-//    self.allImages = [images mutableCopy];
-//    
-//    // This method sets up the downloaded images and places them nicely in a grid
-//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_async(queue, ^{
-//        NSMutableArray *imageDataArray = [NSMutableArray array];
-//        
-//        // Iterate over all images and get the data from the PFFile
-//        for (int i = 0; i < images.count; i++) {
-//            PFObject *eachObject = [images objectAtIndex:i];
-//            PFFile *theImage = [eachObject objectForKey:@kParseObjectImageKey];
-//            NSData *imageData = [theImage getData];
-//            UIImage *image = [UIImage imageWithData:imageData];
-//            [imageDataArray addObject:image];
-//        }
-//        
-//        // Dispatch to main thread to update the UI
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // Remove old grid
-//            for (UIView *view in [self.photoScrollView subviews]) {
-//                if ([view isKindOfClass:[UIButton class]]) {
-//                    [view removeFromSuperview];
-//                }
-//            }
-//            
-//            // Create the buttons necessary for each image in the grid
-//            for (int i = 0; i < [imageDataArray count]; i++) {
-//                PFObject *eachObject = [images objectAtIndex:i];
-//                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//                UIImage *image = [imageDataArray objectAtIndex:i];
-//                [button setImage:image forState:UIControlStateNormal];
-//                button.showsTouchWhenHighlighted = YES;
-//                [button addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
-//                button.tag = i;
-//                button.frame = CGRectMake(THUMBNAIL_WIDTH * (i % THUMBNAIL_COLS) + PADDING * (i % THUMBNAIL_COLS) + PADDING,
-//                                          THUMBNAIL_HEIGHT * (i / THUMBNAIL_COLS) + PADDING * (i / THUMBNAIL_COLS) + PADDING + PADDING_TOP,
-//                                          THUMBNAIL_WIDTH,
-//                                          THUMBNAIL_HEIGHT);
-//                button.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//                [button setTitle:[eachObject objectId] forState:UIControlStateReserved];
-//                
-//                if([[images objectAtIndex:i] objectForKey:@"caption"] != NULL){
-//                    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
-//                    label.backgroundColor = [UIColor whiteColor];
-//    //                label.textColor = [UIColor ba];
-//                    label.text = [[images objectAtIndex:i] objectForKey:@"caption"];
-//                    [button addSubview:label];
-//                }
-//                
-//                [self.photoScrollView addSubview:button];
-//            }
-//            
-//            // Size the grid accordingly
-//            int rows = images.count / THUMBNAIL_COLS;
-//            if (((float)images.count / THUMBNAIL_COLS) - rows != 0) {
-//                rows++;
-//            }
-//            int height = THUMBNAIL_HEIGHT * rows + PADDING * rows + PADDING + PADDING_TOP;
-//            
-//            self.photoScrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
-//            self.photoScrollView.clipsToBounds = YES;
-//        });
-//    });
 }
 
 - (IBAction)buttonTouched:(id)sender{
@@ -327,16 +187,16 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedCell * cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"fcell" forIndexPath:indexPath];
-    PFFile *theImage = [[self.allImages objectAtIndex:indexPath.row] objectForKey:@kParseObjectImageKey];
-    NSData *imageData = [theImage getData];
-    UIImage *image = [UIImage imageWithData:imageData];
+//    PFFile *theImage = ;
+//    NSData *imageData = [theImage getData];
+    UIImage *image = [UIImage imageWithData:[self.allImages objectAtIndex:indexPath.row]];
     [cell.imageView setImage:image];
     
-    if([[self.allImages objectAtIndex:indexPath.row]  objectForKey:@"caption"] != NULL && ![[[self.allImages objectAtIndex:indexPath.row]  objectForKey:@"caption"]  isEqual: @""]){
+    if([[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"] != NULL && ![[[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"]  isEqual: @""]){
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
         label.backgroundColor = [UIColor whiteColor];
         //                label.textColor = [UIColor ba];
-        label.text = [[self.allImages objectAtIndex:indexPath.row]  objectForKey:@"caption"];
+        label.text = [[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"];
         [cell addSubview:label];
     }
 //    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -361,7 +221,7 @@
     NSLog(@"selected");
     DetailViewController *dvc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     
-    dvc.object = self.allImages[[indexPath row]];
+    dvc.object = self.allData[[indexPath row]];
     
     [self.navigationController pushViewController:dvc animated:YES];
 }
