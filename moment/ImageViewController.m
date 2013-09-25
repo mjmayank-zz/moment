@@ -32,6 +32,11 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,6 +46,12 @@
     [self.view addGestureRecognizer:tap];
     
     self.textField.delegate = self;
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:
+     UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:
+     UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -160,26 +171,34 @@
     //    self.view.backgroundColor = [UIColor aquaColor];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self animateTextField:textField up:YES];
+    [self animateTextField:self.textField up:YES withInfo:notification.userInfo];
 }
 
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self animateTextField:textField up:NO];
+    [self animateTextField:self.textField up:NO withInfo:notification.userInfo];
 }
 
-- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up withInfo:(NSDictionary *)userInfo
 {
     const int movementDistance = 30; // tweak as needed
-    const float movementDuration = 0.3f; // tweak as needed
+    NSTimeInterval movementDuration;
+    UIViewAnimationCurve animationCurve;
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&movementDuration]; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);
     
     [UIView beginAnimations: @"anim" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationCurve: animationCurve];
     [UIView setAnimationDuration: movementDuration];
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
