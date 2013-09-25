@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 #import "FeedCell.h"
+#import <Parse/Parse.h>
 
 @interface ViewController ()
 
@@ -32,6 +33,7 @@
         // Custom initialization
         self.allImages = [[NSMutableArray alloc] init];
     }
+    
     return self;
 }
 
@@ -147,22 +149,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-//            if (self.refreshHUD) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.refreshHUD hide:YES];
-//                    self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//                    [self.view addSubview:self.refreshHUD];
-//
-//                    // The sample image is based on the work by http://www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
-//                    // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
-//                    self.refreshHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-//                    
-//                    // Set custom view mode
-//                    self.refreshHUD.mode = MBProgressHUDModeCustomView;
-//                    
-//                    self.refreshHUD.delegate = self;
-//                });
-//            }
+
             NSLog(@"Successfully retrieved %lu photos.", (unsigned long)objects.count);
             
             // Retrieve existing objectIDs
@@ -250,70 +237,70 @@
 
 - (void)setUpImages:(NSArray *)images
 {
-    // Contains a list of all the BUTTONS
-    self.allImages = [images mutableCopy];
-    
-    // This method sets up the downloaded images and places them nicely in a grid
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        NSMutableArray *imageDataArray = [NSMutableArray array];
-        
-        // Iterate over all images and get the data from the PFFile
-        for (int i = 0; i < images.count; i++) {
-            PFObject *eachObject = [images objectAtIndex:i];
-            PFFile *theImage = [eachObject objectForKey:@kParseObjectImageKey];
-            NSData *imageData = [theImage getData];
-            UIImage *image = [UIImage imageWithData:imageData];
-            [imageDataArray addObject:image];
-        }
-        
-        // Dispatch to main thread to update the UI
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Remove old grid
-            for (UIView *view in [self.photoScrollView subviews]) {
-                if ([view isKindOfClass:[UIButton class]]) {
-                    [view removeFromSuperview];
-                }
-            }
-            
-            // Create the buttons necessary for each image in the grid
-            for (int i = 0; i < [imageDataArray count]; i++) {
-                PFObject *eachObject = [images objectAtIndex:i];
-                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                UIImage *image = [imageDataArray objectAtIndex:i];
-                [button setImage:image forState:UIControlStateNormal];
-                button.showsTouchWhenHighlighted = YES;
-                [button addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
-                button.tag = i;
-                button.frame = CGRectMake(THUMBNAIL_WIDTH * (i % THUMBNAIL_COLS) + PADDING * (i % THUMBNAIL_COLS) + PADDING,
-                                          THUMBNAIL_HEIGHT * (i / THUMBNAIL_COLS) + PADDING * (i / THUMBNAIL_COLS) + PADDING + PADDING_TOP,
-                                          THUMBNAIL_WIDTH,
-                                          THUMBNAIL_HEIGHT);
-                button.imageView.contentMode = UIViewContentModeScaleAspectFill;
-                [button setTitle:[eachObject objectId] forState:UIControlStateReserved];
-                
-                if([[images objectAtIndex:i] objectForKey:@"caption"] != NULL){
-                    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
-                    label.backgroundColor = [UIColor whiteColor];
-    //                label.textColor = [UIColor ba];
-                    label.text = [[images objectAtIndex:i] objectForKey:@"caption"];
-                    [button addSubview:label];
-                }
-                
-                [self.photoScrollView addSubview:button];
-            }
-            
-            // Size the grid accordingly
-            int rows = images.count / THUMBNAIL_COLS;
-            if (((float)images.count / THUMBNAIL_COLS) - rows != 0) {
-                rows++;
-            }
-            int height = THUMBNAIL_HEIGHT * rows + PADDING * rows + PADDING + PADDING_TOP;
-            
-            self.photoScrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
-            self.photoScrollView.clipsToBounds = YES;
-        });
-    });
+//    // Contains a list of all the BUTTONS
+//    self.allImages = [images mutableCopy];
+//    
+//    // This method sets up the downloaded images and places them nicely in a grid
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_async(queue, ^{
+//        NSMutableArray *imageDataArray = [NSMutableArray array];
+//        
+//        // Iterate over all images and get the data from the PFFile
+//        for (int i = 0; i < images.count; i++) {
+//            PFObject *eachObject = [images objectAtIndex:i];
+//            PFFile *theImage = [eachObject objectForKey:@kParseObjectImageKey];
+//            NSData *imageData = [theImage getData];
+//            UIImage *image = [UIImage imageWithData:imageData];
+//            [imageDataArray addObject:image];
+//        }
+//        
+//        // Dispatch to main thread to update the UI
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            // Remove old grid
+//            for (UIView *view in [self.photoScrollView subviews]) {
+//                if ([view isKindOfClass:[UIButton class]]) {
+//                    [view removeFromSuperview];
+//                }
+//            }
+//            
+//            // Create the buttons necessary for each image in the grid
+//            for (int i = 0; i < [imageDataArray count]; i++) {
+//                PFObject *eachObject = [images objectAtIndex:i];
+//                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//                UIImage *image = [imageDataArray objectAtIndex:i];
+//                [button setImage:image forState:UIControlStateNormal];
+//                button.showsTouchWhenHighlighted = YES;
+//                [button addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+//                button.tag = i;
+//                button.frame = CGRectMake(THUMBNAIL_WIDTH * (i % THUMBNAIL_COLS) + PADDING * (i % THUMBNAIL_COLS) + PADDING,
+//                                          THUMBNAIL_HEIGHT * (i / THUMBNAIL_COLS) + PADDING * (i / THUMBNAIL_COLS) + PADDING + PADDING_TOP,
+//                                          THUMBNAIL_WIDTH,
+//                                          THUMBNAIL_HEIGHT);
+//                button.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//                [button setTitle:[eachObject objectId] forState:UIControlStateReserved];
+//                
+//                if([[images objectAtIndex:i] objectForKey:@"caption"] != NULL){
+//                    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 282, 312, 30)];
+//                    label.backgroundColor = [UIColor whiteColor];
+//    //                label.textColor = [UIColor ba];
+//                    label.text = [[images objectAtIndex:i] objectForKey:@"caption"];
+//                    [button addSubview:label];
+//                }
+//                
+//                [self.photoScrollView addSubview:button];
+//            }
+//            
+//            // Size the grid accordingly
+//            int rows = images.count / THUMBNAIL_COLS;
+//            if (((float)images.count / THUMBNAIL_COLS) - rows != 0) {
+//                rows++;
+//            }
+//            int height = THUMBNAIL_HEIGHT * rows + PADDING * rows + PADDING + PADDING_TOP;
+//            
+//            self.photoScrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+//            self.photoScrollView.clipsToBounds = YES;
+//        });
+//    });
 }
 
 - (IBAction)buttonTouched:(id)sender{
@@ -393,6 +380,6 @@
 // 3
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(8, 8, 8, 8);
+    return UIEdgeInsetsMake(4, 8, 4, 8);
 }
 @end

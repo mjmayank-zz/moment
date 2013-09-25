@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "LocationManager.h"
 
 @interface DetailViewController ()
 
