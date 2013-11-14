@@ -93,6 +93,10 @@
     PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:_myAnnotation.coordinate.latitude
                                                       longitude:_myAnnotation.coordinate.longitude];
 
+    FMDatabase * db = ((AppDelegate *)[UIApplication sharedApplication].delegate).db;
+    NSString * query = [NSString stringWithFormat:@"INSERT INTO Photos VALUES (%f, %f", _myAnnotation.coordinate.latitude, _myAnnotation.coordinate.longitude];
+    [db executeQuery:query];
+
     // Create a PFObject using the Post class and set the values we extracted above
     PFObject *postObject = [PFObject objectWithClassName:@kParseObjectClassKey];
     [postObject setObject:currentPoint forKey:@kParseObjectGeoKey];

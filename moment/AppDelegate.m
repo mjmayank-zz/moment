@@ -15,6 +15,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.db = [FMDatabase databaseWithPath:@"~/Downloads/db.sqlite"];
+    [self.db open];
+    [self.db executeQuery:@"CREATE TABLE Photos (Lat double, Long double);"];
+
     [Parse setApplicationId:@"4UrdUCu4ALSAT8vpH1vrLPTI7dW2CjcydIMQCXgb"
                   clientKey:@"ftQDhlqMTJejiNTvibgjKB2xCL4KiWsPXFk2Wqad"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
