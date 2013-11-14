@@ -15,12 +15,14 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
+#import "FMDatabase.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController * vc;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) FMDatabase *db;
 
 + (CLLocationManager *)sharedLocationManager;
 

@@ -14,6 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.db = [FMDatabase databaseWithPath:@"~/Downloads/db.sqlite"];
     [Parse setApplicationId:@"4UrdUCu4ALSAT8vpH1vrLPTI7dW2CjcydIMQCXgb"
                   clientKey:@"ftQDhlqMTJejiNTvibgjKB2xCL4KiWsPXFk2Wqad"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
