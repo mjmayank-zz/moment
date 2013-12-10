@@ -63,4 +63,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)deleteButtonPressed:(id)sender {
+    [self.deleteButton setEnabled:NO];
+    [self.object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+
+}
+
+- (IBAction)likeButtonPressed:(id)sender {
+    [self.likeButton setEnabled:NO];
+    if(self.object[@"Likes"] == NULL){
+        self.object[@"Likes"] = @1;
+    }
+    else{
+        [self.object incrementKey:@"Likes"];
+    }
+    [self.object saveInBackground];
+}
 @end

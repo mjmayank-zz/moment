@@ -10,11 +10,13 @@
 
 @interface FeedCell : UICollectionViewCell{
     IBOutlet UIImageView *imageView;
+    IBOutlet UILabel *likesLabel;
     IBOutlet UILabel *captionLabel;
 }
 
 
 @property (strong, nonatomic) NSString * caption;
+@property (strong, nonatomic) NSString * likes;
 @property (strong, nonatomic) UIImage * image;
 @property (strong, nonatomic) IBOutlet UIView *labelContainer;
 

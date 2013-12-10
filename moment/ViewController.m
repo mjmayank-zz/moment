@@ -12,6 +12,7 @@
 #import "DetailViewController.h"
 #import "FeedCell.h"
 #import "AFHTTPRequestOperationManager.h"
+#include <stdlib.h>
 
 @interface ViewController ()
 
@@ -160,8 +161,9 @@
                     PFFile *theImage = [object objectForKey:@kParseObjectImageKey];
                     
                     NSData *imageData = [theImage getData];
-                    
-                    [self.allImages addObject:imageData];
+                    if(imageData != nil){
+                        [self.allImages addObject:imageData];
+                    }
                 }
 //                self.allImages = temp;
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -208,6 +210,16 @@
     if([[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"] != NULL){
         [cell showCaption];
         [cell setCaption:[[self.allData objectAtIndex:indexPath.row]  objectForKey:@"caption"]];
+//        if([[self.allData objectAtIndex:indexPath.row]  objectForKey:@"Likes"] == NULL){
+//            [cell setLikes:@"No likes"];
+//        }
+//        else{
+//            NSString * numLikes = [[self.allData objectAtIndex:indexPath.row]  objectForKey:@"Likes"];
+//            [numLikes stringByAppendingString:@"likes"];
+//            [cell setLikes:numLikes];
+//        }
+        int likes = [[[self.allData objectAtIndex:indexPath.row]  objectForKey:@"Likes"] intValue];
+        [cell setLikes:[NSString stringWithFormat:@"%d likes", likes]];
     }
     else{
         [cell hideCaption];
@@ -234,6 +246,8 @@
     DetailViewController *dvc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     
     dvc.object = self.allData[[indexPath row]];
+    
+    [dvc.imageView setImage:[UIImage imageWithData:[self.allImages objectAtIndex:indexPath.row]]];
     
     [self.navigationController pushViewController:dvc animated:YES];
 }

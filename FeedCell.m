@@ -33,6 +33,11 @@
 }
 */
 
+-(void) setLikes:(NSString *)likes
+{
+    likesLabel.text = likes;
+}
+
 -(void) setCaption:(NSString *)caption
 {
     captionLabel.text = caption;
