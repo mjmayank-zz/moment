@@ -54,13 +54,6 @@
     UIBarButtonItem *camera = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = camera;
     camera.enabled=TRUE;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://example.com/resources.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -146,6 +139,15 @@
     // Construct query
     PFQuery *query = [PFQuery queryWithClassName:@kParseObjectClassKey];
     [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:2];
+    
+    NSString *url = [NSString stringWithFormat:@"http://192.168.0.102:5000/all?long=%f&lat=%f", userLocation.latitude, userLocation.longitude];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {

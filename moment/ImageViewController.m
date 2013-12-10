@@ -8,6 +8,7 @@
 
 #import "ImageViewController.h"
 #import "MomentAnnotation.h"
+#import "AFHTTPRequestOperationManager.h"
 #define METERS_PER_MILE 1609.344
 
 @interface ImageViewController ()
@@ -85,6 +86,13 @@
     UIImage *image = [self.photoInfo objectForKey:@"UIImagePickerControllerEditedImage"];
     NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
     [self uploadImage:imageData];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 - (IBAction)postPost:(id)sender;
