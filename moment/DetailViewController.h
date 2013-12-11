@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImage * image;
 
 @property (strong, nonatomic) CLLocation *location;
 @property (assign, nonatomic) CLLocationDistance distance;

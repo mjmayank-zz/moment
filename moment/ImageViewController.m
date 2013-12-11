@@ -156,7 +156,9 @@
         
         NSString * paramextenstion = [NSString stringWithFormat:@"/create?title=%@&geoLong=%@&geoLat=%@&image_url=%@&slug=%@", self.textField.text, [NSString stringWithFormat:@"%f", _myAnnotation.coordinate.longitude], [NSString stringWithFormat:@"%f", _myAnnotation.coordinate.latitude], responseObject[@"image_url"], responseObject[@"slug"]];
         
-        [manager POST:[kIPAdresss stringByAppendingString:paramextenstion] parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        [manager POST:[[kIPAdresss stringByAppendingString:paramextenstion] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Success: %@", responseObject);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

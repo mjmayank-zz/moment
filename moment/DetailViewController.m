@@ -42,6 +42,8 @@
     
     self.distance = [userLocation distanceFromLocation:self.location];
     self.distanceLabel.text = [NSString stringWithFormat:@"%.0f meters away", self.distance];
+    
+    [self.imageView setImage:self.image];
 }
 
 - (void) viewDidAppear:(BOOL)animated

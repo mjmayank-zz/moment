@@ -249,7 +249,7 @@
     
     dvc.object = self.allData[[indexPath row]];
     
-    [dvc.imageView setImage:[UIImage imageWithData:[self.allImages objectAtIndex:indexPath.row]]];
+    dvc.image = [UIImage imageWithData:[self.allImages objectAtIndex:indexPath.row]];
     
     [self.navigationController pushViewController:dvc animated:YES];
 }
