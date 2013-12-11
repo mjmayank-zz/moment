@@ -8,7 +8,9 @@
 
 #import "ImageViewController.h"
 #import "MomentAnnotation.h"
-#import "AFHTTPRequestOperationManager.h"
+#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFHTTPRequestOperation.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 #define METERS_PER_MILE 1609.344
 
 @interface ImageViewController ()
@@ -86,13 +88,6 @@
     UIImage *image = [self.photoInfo objectForKey:@"UIImagePickerControllerEditedImage"];
     NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
     [self uploadImage:imageData];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
 }
 
 - (IBAction)postPost:(id)sender;
@@ -129,6 +124,47 @@
     self.HUD.delegate = self;
     self.HUD.labelText = @"Uploading";
     [self.HUD show:YES];
+    
+    
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    [data setObject:imageData forKey:@"image"];
+    __block NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSDictionary *parameters = @{@"foo": array};
+    
+    [manager POST:[kIPAdresss stringByAppendingString:@"/upload"] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //        [formData appendPartWithFormData:imageData name:@"file"];
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpg" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        param = [@{@"title": self.textField.text,
+                                                                @"geoLong": [NSString stringWithFormat:@"%f", _myAnnotation.coordinate.longitude],
+                                                                @"geoLat": [NSString stringWithFormat:@"%f", _myAnnotation.coordinate.latitude],
+                                                                @"image_url": responseObject[@"image_url"],
+                                                                @"slug": responseObject[@"slug"]} mutableCopy];
+        
+//        NSURL *url = [NSURL URLWithString:@"http://someurl.com/"];
+//        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+//        // don't forget to set parameterEncoding!
+//        httpClient.parameterEncoding = AFJSONParameterEncoding;
+//        NSDictionary *params = @{@"key" : @"value"};
+//        NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"" parameters:params];
+//        AFHTTPRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:nil failure:nil];
+//        [operation start];
+        
+        NSString * paramextenstion = [NSString stringWithFormat:@"/create?title=%@&geoLong=%@&geoLat=%@&image_url=%@&slug=%@", self.textField.text, [NSString stringWithFormat:@"%f", _myAnnotation.coordinate.longitude], [NSString stringWithFormat:@"%f", _myAnnotation.coordinate.latitude], responseObject[@"image_url"], responseObject[@"slug"]];
+        
+        [manager POST:[kIPAdresss stringByAppendingString:paramextenstion] parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Success: %@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
     
     // Save PFFile
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

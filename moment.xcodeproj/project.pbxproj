@@ -71,6 +71,7 @@
 		8F84F003183EA70900924D9B /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		8F87FCA317F26DFD00C91FC6 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		8F87FCA417F26DFD00C91FC6 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		8FBEB77718580FC50081C3AD /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8FE77E8717EE060F00654095 /* moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE77E8A17EE060F00654095 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8FE77E8C17EE060F00654095 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -201,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				8F87FCA317F26DFD00C91FC6 /* LocationManager.h */,
+				8FBEB77718580FC50081C3AD /* Constants.h */,
 				8F87FCA417F26DFD00C91FC6 /* LocationManager.m */,
 				8FE77E9917EE060F00654095 /* AppDelegate.h */,
 				8FE77E9A17EE060F00654095 /* AppDelegate.m */,

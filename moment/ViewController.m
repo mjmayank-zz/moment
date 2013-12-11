@@ -140,7 +140,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@kParseObjectClassKey];
     [query whereKey:@kParseObjectGeoKey nearGeoPoint:userLocation withinKilometers:2];
     
-    NSString *url = [NSString stringWithFormat:@"http://192.168.0.102:5000/all?long=%f&lat=%f", userLocation.latitude, userLocation.longitude];
+    NSString *url = [kIPAdresss stringByAppendingString:[NSString stringWithFormat:@"/all?long=%f&lat=%f", userLocation.latitude, userLocation.longitude]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
